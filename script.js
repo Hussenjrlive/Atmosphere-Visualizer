@@ -27,7 +27,7 @@ document.getElementById('city-input').addEventListener('keypress', function (e) 
 });
 
 function updateEnvironment(data) {
-    const bg = document.getElementById('bg');
+    const bg = document.getElementById("bg");
     const temp = document.getElementById('temp');
     const desc = document.getElementById('description');
     const overlay = document.getElementById('overlay');
@@ -76,3 +76,4 @@ function makeItRain() {
         overlay.appendChild(drop);
     }
 }
+
