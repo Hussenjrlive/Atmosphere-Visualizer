@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmosphere | Weather Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="bg"></div>
+    
+    <div id="overlay"></div>
+
+    <div class="content">
+        <p id="description">Discover the Sky</p>
+        <h1 id="temp">--°</h1>
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Search City...">
+            <button onclick="getWeather()">Check</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
