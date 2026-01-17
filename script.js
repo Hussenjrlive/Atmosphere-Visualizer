@@ -32,32 +32,35 @@ function updateEnvironment(data) {
     const desc = document.getElementById('description');
     const overlay = document.getElementById('overlay');
     
-    const weather = data.weather[0].main.toLowerCase();
+    const mainWeather = data.weather[0].main.toLowerCase();
+    
+    // Check if it's night in that specific city
     const isNight = data.dt > data.sys.sunset || data.dt < data.sys.sunrise;
     
     temp.innerText = Math.round(data.main.temp) + "°";
     desc.innerText = data.weather[0].description;
-    
     overlay.innerHTML = ""; 
 
-    // 1. NIGHT LOGIC
     if (isNight) {
+        // Dark Night Theme
         bg.style.background = "linear-gradient(to bottom, #0f2027, #203a43, #2c5364)";
-        desc.innerText += " (Night)";
-        // If it's raining at night, still show rain
-        if (weather.includes("rain")) makeItRain();
-    } 
-    // 2. DAY LOGIC
-    else {
-        if (weather.includes("rain") || weather.includes("drizzle")) {
+        if (mainWeather.includes("rain")) makeItRain();
+    } else {
+        // DAY THEMES - Fixed Priority
+        if (mainWeather.includes("rain") || mainWeather.includes("drizzle")) {
             bg.style.background = "#4b6584"; 
             makeItRain();
-        } else if (weather.includes("clear")) {
+        } 
+        // We check CLEAR first so "Scattered Clouds" doesn't hide the sun
+        else if (mainWeather.includes("clear")) {
             bg.style.background = "linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%)";
-        } else if (weather.includes("cloud")) {
-            bg.style.background = "linear-gradient(to bottom, #757f9a, #d7dde8)";
-        } else {
-            bg.style.background = "#1a1a2e"; 
+        } 
+        // Brighter Grey for clouds so it looks like daytime
+        else if (mainWeather.includes("cloud")) {
+            bg.style.background = "linear-gradient(to bottom, #bdc3c7, #2c3e50)"; 
+        } 
+        else {
+            bg.style.background = "linear-gradient(to bottom, #4facfe, #00f2fe)"; 
         }
     }
 }
